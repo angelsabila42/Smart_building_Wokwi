@@ -15,10 +15,10 @@
 #include "esp_log.h"
 #include "esp_err.h"
 
-#include "../../../../src/entrance/Sdcard/sd_card.h"
-#include "../../../../src/entrance/Serv/serv.h"
-#include "../../../../src/entrance/Passage/passage.h"
-#include "../../../../src/entrance/Accesscontrol/access_control.h"
+#include "../Sdcard/sd_card.h"
+#include "../Serv/serv.h"
+#include "passage.h"
+#include "../Accesscontrol/access_control.h"
 
 #define ENTRY_BUTTON GPIO_NUM_1
 #define EXIT_BUTTON GPIO_NUM_13

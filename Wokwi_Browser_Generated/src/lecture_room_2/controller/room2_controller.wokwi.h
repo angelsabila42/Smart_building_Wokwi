@@ -1,9 +1,9 @@
 #ifndef WOKWI_IMPL_SRC_LECTURE_ROOM_2_CONTROLLER_ROOM2_CONTROLLER_WOKWI_H
 #define WOKWI_IMPL_SRC_LECTURE_ROOM_2_CONTROLLER_ROOM2_CONTROLLER_WOKWI_H
 
-#include "../../../../src/lecture_room_2/room2_state.h"
-#include "../../../../src/lecture_room_2/controller/room2_controller.h"
-#include "../../../../src/common/room_status.h"
+#include "../room2_state.h"
+#include "room2_controller.h"
+#include "../../common/room_status.h"
 
 int room2_occupancy = 0;
 int room2_first_sensor = 0;

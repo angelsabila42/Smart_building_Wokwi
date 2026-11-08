@@ -1,8 +1,8 @@
 #ifndef WOKWI_IMPL_SRC_LECTURE_ROOM_2_PINS_PINS_WOKWI_H
 #define WOKWI_IMPL_SRC_LECTURE_ROOM_2_PINS_PINS_WOKWI_H
 
-#include "../../../../src/lecture_room_2/room2_state.h"
-#include "../../../../src/lecture_room_2/pins/pins.h"
+#include "../room2_state.h"
+#include "pins.h"
 
 void room2_init_pins(){
         gpio_config_t pir_config = {

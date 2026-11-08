@@ -1,13 +1,13 @@
 #ifndef WOKWI_IMPL_SRC_COMMON_ROOM_STATUS_WOKWI_H
 #define WOKWI_IMPL_SRC_COMMON_ROOM_STATUS_WOKWI_H
 
-#include "../../../src/common/room_status.h"
+#include "room_status.h"
 
 #include <stddef.h>
 #include <stdio.h>
 
 #include "esp_log.h"
-#include "../../../src/entrance/Sdcard/sd_card.h"
+#include "../entrance/Sdcard/sd_card.h"
 
 typedef struct {
     int occupancy;

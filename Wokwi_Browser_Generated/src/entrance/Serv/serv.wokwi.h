@@ -6,8 +6,8 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/timers.h"
 
-#include "../../../../src/entrance/Serv/serv.h"
-#include "../../../../src/entrance/Rgb/rgb.h"
+#include "serv.h"
+#include "../Rgb/rgb.h"
 
 #include "esp_log.h"
 

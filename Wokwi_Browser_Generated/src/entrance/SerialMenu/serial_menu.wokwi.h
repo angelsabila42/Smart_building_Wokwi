@@ -1,14 +1,14 @@
 #ifndef WOKWI_IMPL_SRC_ENTRANCE_SERIALMENU_SERIAL_MENU_WOKWI_H
 #define WOKWI_IMPL_SRC_ENTRANCE_SERIALMENU_SERIAL_MENU_WOKWI_H
 
-#include "../../../../src/entrance/SerialMenu/serial_menu.h"
-#include "../../../../src/entrance/AdminAuth/admin_auth.h"
-#include "../../../../src/entrance/Schedule/schedule.h"
-#include "../../../../src/entrance/Accesscontrol/access_control.h"
-#include "../../../../src/entrance/Sdcard/sd_card.h"
-#include "../../../../src/entrance/Alarm/alarm.h"
-#include "../../../../src/common/room_status.h"
-#include "../../../../src/entrance/wifi/wifi.h"
+#include "serial_menu.h"
+#include "../AdminAuth/admin_auth.h"
+#include "../Schedule/schedule.h"
+#include "../Accesscontrol/access_control.h"
+#include "../Sdcard/sd_card.h"
+#include "../Alarm/alarm.h"
+#include "../../common/room_status.h"
+#include "../wifi/wifi.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"

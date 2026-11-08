@@ -1,7 +1,7 @@
 #ifndef WOKWI_IMPL_SRC_ENTRANCE_WIFI_WIFI_WOKWI_H
 #define WOKWI_IMPL_SRC_ENTRANCE_WIFI_WIFI_WOKWI_H
 
-#include "../../../../src/entrance/wifi/wifi.h"
+#include "wifi.h"
 
 #include "esp_event.h"
 #include "esp_log.h"

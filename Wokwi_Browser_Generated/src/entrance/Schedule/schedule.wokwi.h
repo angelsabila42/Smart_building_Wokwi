@@ -1,7 +1,7 @@
 #ifndef WOKWI_IMPL_SRC_ENTRANCE_SCHEDULE_SCHEDULE_WOKWI_H
 #define WOKWI_IMPL_SRC_ENTRANCE_SCHEDULE_SCHEDULE_WOKWI_H
 
-#include "../../../../src/entrance/Schedule/schedule.h"
+#include "schedule.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"

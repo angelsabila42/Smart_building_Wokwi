@@ -63,20 +63,54 @@ void app_main() {
 
 
 /* Generated implementation includes: the browser build compiles this one translation unit. */
+#define TAG WOKWI_TAG_COMPONENTS_RC522_RC522_WOKWI_H
 #include "../components/rc522/rc522.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_ENTRANCE_RFID_WOKWI_H
 #include "entrance/rfid.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_ENTRANCE_ACCESSCONTROL_ACCESS_CONTROL_WOKWI_H
 #include "entrance/Accesscontrol/access_control.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_ENTRANCE_RGB_RGB_WOKWI_H
 #include "entrance/Rgb/rgb.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_ENTRANCE_SERV_SERV_WOKWI_H
 #include "entrance/Serv/serv.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_ENTRANCE_SDCARD_SD_CARD_WOKWI_H
 #include "entrance/Sdcard/sd_card.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_ENTRANCE_PASSAGE_PASSAGE_WOKWI_H
 #include "entrance/Passage/passage.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_ENTRANCE_WIFI_WIFI_WOKWI_H
 #include "entrance/wifi/wifi.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_ENTRANCE_SCHEDULE_SCHEDULE_WOKWI_H
 #include "entrance/Schedule/schedule.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_ENTRANCE_ADMINAUTH_ADMIN_AUTH_WOKWI_H
 #include "entrance/AdminAuth/admin_auth.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_ENTRANCE_SERIALMENU_SERIAL_MENU_WOKWI_H
 #include "entrance/SerialMenu/serial_menu.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_ENTRANCE_ALARM_ALARM_WOKWI_H
 #include "entrance/Alarm/alarm.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_LECTURE_ROOM_1_CONTROLLER_ROOM1_CONTROLLER_WOKWI_H
 #include "lecture_room_1/controller/room1_controller.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_LECTURE_ROOM_1_PINS_PINS_WOKWI_H
 #include "lecture_room_1/pins/pins.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_LECTURE_ROOM_2_CONTROLLER_ROOM2_CONTROLLER_WOKWI_H
 #include "lecture_room_2/controller/room2_controller.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_LECTURE_ROOM_2_PINS_PINS_WOKWI_H
 #include "lecture_room_2/pins/pins.wokwi.h"
+#undef TAG
+#define TAG WOKWI_TAG_SRC_COMMON_ROOM_STATUS_WOKWI_H
 #include "common/room_status.wokwi.h"
+#undef TAG

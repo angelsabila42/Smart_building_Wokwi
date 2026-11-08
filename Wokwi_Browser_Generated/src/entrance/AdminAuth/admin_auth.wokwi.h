@@ -1,7 +1,7 @@
 #ifndef WOKWI_IMPL_SRC_ENTRANCE_ADMINAUTH_ADMIN_AUTH_WOKWI_H
 #define WOKWI_IMPL_SRC_ENTRANCE_ADMINAUTH_ADMIN_AUTH_WOKWI_H
 
-#include "../../../../src/entrance/AdminAuth/admin_auth.h"
+#include "admin_auth.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"

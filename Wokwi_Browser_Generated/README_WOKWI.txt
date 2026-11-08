@@ -1,9 +1,10 @@
 Generated browser-project candidate for the CoCIS Smart Control and Monitoring System.
 
-Files: src/main.c plus generated *.wokwi.h implementation headers, original module headers,
-the RC522 component source/header, and the original diagram.json.
+To regenerate after changing the original project, run `python generate_wokwi_browser.py`
+from the project root. Import every file in this folder into a Wokwi ESP-IDF browser
+project, preserving the folder structure. The root main.c includes src/main.c, which
+includes the generated implementation headers.
 
-The original PlatformIO project was not modified. This package must be imported into a
-Wokwi ESP-IDF browser project and built/tested there. If the browser builder does not
-accept nested header files, add the generated headers as project files while preserving
-their paths. Do not use the informational placeholder app_main from an older template.
+Build and test the imported project in Wokwi before sharing its project URL. This bundle
+is generated source, not a firmware binary. The original PlatformIO project is unchanged
+by generation and remains the source of truth.

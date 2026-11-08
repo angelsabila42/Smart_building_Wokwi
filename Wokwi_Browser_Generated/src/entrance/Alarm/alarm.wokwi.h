@@ -1,13 +1,13 @@
 #ifndef WOKWI_IMPL_SRC_ENTRANCE_ALARM_ALARM_WOKWI_H
 #define WOKWI_IMPL_SRC_ENTRANCE_ALARM_ALARM_WOKWI_H
 
-#include "../../../../src/entrance/Alarm/alarm.h"
-#include "../../../../src/entrance/Serv/serv.h"
-#include "../../../../src/entrance/Sdcard/sd_card.h"
-#include "../../../../src/entrance/Rgb/rgb.h"
+#include "alarm.h"
+#include "../Serv/serv.h"
+#include "../Sdcard/sd_card.h"
+#include "../Rgb/rgb.h"
 
 #include "driver/gpio.h"
-#include "../../../../src/entrance/Rgb/rgb.h"
+#include "../Rgb/rgb.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"

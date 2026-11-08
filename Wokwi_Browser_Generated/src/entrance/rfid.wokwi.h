@@ -11,13 +11,13 @@
 #include "esp_log.h"
 #include "esp_err.h"
 
-#include "../../../components/rc522/rc522.h"
-#include "../../../src/entrance/Rgb/rgb.h"
-#include "../../../src/entrance/Serv/serv.h"
-#include "../../../src/entrance/Sdcard/sd_card.h"
-#include "../../../src/entrance/Passage/passage.h"
-#include "../../../src/entrance/Accesscontrol/access_control.h"
-#include "../../../src/entrance/Schedule/schedule.h"
+#include "../../components/rc522/rc522.h"
+#include "Rgb/rgb.h"
+#include "Serv/serv.h"
+#include "Sdcard/sd_card.h"
+#include "Passage/passage.h"
+#include "Accesscontrol/access_control.h"
+#include "Schedule/schedule.h"
 
 //SPI communication pins
 #define RFID_MISO GPIO_NUM_37

@@ -11,8 +11,8 @@ Usage (from the project root):
     python generate_wokwi_browser.py
     python generate_wokwi_browser.py --output Wokwi_Browser_Generated
 
-The generated project is a candidate for the Wokwi browser ESP-IDF editor;
-it still needs to be built and tested there. This script does not upload
+The generated project is intended for import into the Wokwi browser ESP-IDF
+editor. Build and test it there before sharing. This script does not upload
 firmware or publish a Wokwi project.
 """
 from __future__ import annotations
@@ -48,7 +48,14 @@ def unique_guard(text: str, relative_path: Path) -> str:
     return text
 
 
-def rewrite_local_includes(text: str, original_dir: Path, output_dir: Path, search_roots: list[Path]):
+def rewrite_local_includes(
+    text: str,
+    original_dir: Path,
+    output_dir: Path,
+    search_roots: list[Path],
+    project_root: Path,
+    generated_root: Path,
+):
     unresolved = []
     pattern = re.compile(r'(?m)^(\s*#\s*include\s*)"([^"]+)"')
 
@@ -59,7 +66,12 @@ def rewrite_local_includes(text: str, original_dir: Path, output_dir: Path, sear
         if found is None:
             unresolved.append(name)
             return match.group(0)
-        rel = Path(os.path.relpath(found, output_dir.resolve())).as_posix()
+        try:
+            generated_file = generated_root / found.relative_to(project_root.resolve())
+        except ValueError:
+            unresolved.append(name)
+            return match.group(0)
+        rel = Path(os.path.relpath(generated_file, output_dir.resolve())).as_posix()
         return f'{prefix}"{rel}"'
 
     return pattern.sub(replace, text), unresolved
@@ -68,7 +80,9 @@ def rewrite_local_includes(text: str, original_dir: Path, output_dir: Path, sear
 def check_static_collisions(source_files: list[Path]):
     patterns = {
         "static function": re.compile(r"\bstatic\s+(?:[\w\s*]+?)\s+(\w+)\s*\([^;{}]*\)\s*\{"),
-        "static variable": re.compile(r"(?m)^\s*static\s+(?:const\s+)?[\w*]+\s+(\w+)\s*(?:\[[^;]*\])?\s*(?:=|;)")
+        "static variable": re.compile(
+            r"(?m)^\s*static\b[^(){};]*?\b([A-Za-z_]\w*)\s*(?:\[[^]]*\])?\s*(?:=|;)"
+        )
     }
     problems = []
     for label, pattern in patterns.items():
@@ -78,7 +92,7 @@ def check_static_collisions(source_files: list[Path]):
             for name in pattern.findall(content):
                 found[name].append(file)
         for name, files in found.items():
-            if len(files) > 1:
+            if name != "TAG" and len(files) > 1:
                 problems.append(f"{label} '{name}' appears in: " + ", ".join(str(p) for p in files))
     return problems
 
@@ -130,7 +144,7 @@ def main():
         content = unique_guard(content, rel)
         original_dir = header.parent
         roots = [src_root] + [src_root / p for p in include_dirs] + [rc522_dir]
-        content, _ = rewrite_local_includes(content, original_dir, dest.parent, roots)
+        content, _ = rewrite_local_includes(content, original_dir, dest.parent, roots, root, output)
         dest.write_text(content, encoding="utf-8")
 
     # Generate one included implementation header per active .c file.
@@ -145,7 +159,9 @@ def main():
         dest = output / rel
         dest.parent.mkdir(parents=True, exist_ok=True)
         content = source.read_text(encoding="utf-8", errors="replace")
-        content, missing_includes = rewrite_local_includes(content, source.parent, dest.parent, all_search_roots)
+        content, missing_includes = rewrite_local_includes(
+            content, source.parent, dest.parent, all_search_roots, root, output
+        )
         if missing_includes:
             unresolved[str(rel)].extend(missing_includes)
         guard = "WOKWI_IMPL_" + re.sub(r"[^A-Za-z0-9]", "_", rel.as_posix()).upper()
@@ -159,15 +175,17 @@ def main():
     main_text = (src_root / "main.c").read_text(encoding="utf-8", errors="replace")
     include_lines = [
         "\n/* Generated implementation includes: the browser build compiles this one translation unit. */",
-        '#include "../components/rc522/rc522.wokwi.h"'
     ]
     for rel in generated_impls:
-        if rel.as_posix() == "components/rc522/rc522.wokwi.h":
-            continue
         # main.c lives in src/, so express each generated include relative to src/.
         target = (output / rel).resolve()
         include_path = Path(os.path.relpath(target, main_dest.parent.resolve())).as_posix()
-        include_lines.append(f'#include "{include_path}"')
+        tag_name = "WOKWI_TAG_" + re.sub(r"[^A-Za-z0-9]", "_", rel.as_posix()).upper()
+        include_lines.extend([
+            f"#define TAG {tag_name}",
+            f'#include "{include_path}"',
+            "#undef TAG",
+        ])
     main_text = main_text.rstrip() + "\n\n" + "\n".join(include_lines) + "\n"
     main_dest.parent.mkdir(parents=True, exist_ok=True)
     main_dest.write_text(main_text, encoding="utf-8")
@@ -178,12 +196,13 @@ def main():
     shutil.copy2(diagram, output / "diagram.json")
     (output / "README_WOKWI.txt").write_text(
         "Generated browser-project candidate for the CoCIS Smart Control and Monitoring System.\n\n"
-        "Files: src/main.c plus generated *.wokwi.h implementation headers, original module headers,\n"
-        "the RC522 component source/header, and the original diagram.json.\n\n"
-        "The original PlatformIO project was not modified. This package must be imported into a\n"
-        "Wokwi ESP-IDF browser project and built/tested there. If the browser builder does not\n"
-        "accept nested header files, add the generated headers as project files while preserving\n"
-        "their paths. Do not use the informational placeholder app_main from an older template.\n",
+        "To regenerate after changing the original project, run `python generate_wokwi_browser.py`\n"
+        "from the project root. Import every file in this folder into a Wokwi ESP-IDF browser\n"
+        "project, preserving the folder structure. The root main.c includes src/main.c, which\n"
+        "includes the generated implementation headers.\n\n"
+        "Build and test the imported project in Wokwi before sharing its project URL. This bundle\n"
+        "is generated source, not a firmware binary. The original PlatformIO project is unchanged\n"
+        "by generation and remains the source of truth.\n",
         encoding="utf-8"
     )
 

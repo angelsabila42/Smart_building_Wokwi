@@ -3,7 +3,7 @@
 
 /*Common Anode setup*/
 #include <stdint.h>
-#include "../../../../src/entrance/Rgb/rgb.h"
+#include "rgb.h"
 
 #include "driver/gpio.h"
 #include "driver/ledc.h"

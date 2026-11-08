@@ -7,7 +7,7 @@
 #include <esp_log.h>
 #include <string.h>
 
-#include "../../../components/rc522/rc522.h"
+#include "rc522.h"
 
 static const char* TAG = "rc522";
 
